@@ -22,8 +22,8 @@ Entrada Q: informa de error y conserva el estado.
 Robot junto a F y orden hacia F: éxito y una sola R en destino.
 Para probar los casos concretos prepara temporalmente una copia local; restaura la distribución aleatoria antes de la entrega. Desde el inicio no se llega a [9][9] con una sola orden.
 README y entrega
-README breve: Qué he conseguido; Qué parte corresponde a cada Challenge; Qué he modificado; Cómo comprobarlo; Problemas encontrados. Indica el JDK y cómo ejecutar src/Main.java. No se pide una memoria extensa.
-Comprueba, realiza commit y push, y abre src/Main.java en GitHub para verificar la versión publicada. Entrega el enlace del repositorio en el formulario del cuaderno JV02 cuando el profesor lo haya activado. Guardar el enlace en la preview no es una entrega.
+README breve: indica el JDK y cómo ejecutar src/Main.java. No se pide una memoria ni una reflexión escrita.
+Comprueba, realiza commit y push, y abre src/Main.java en GitHub para verificar la versión publicada. Entrega el enlace del repositorio seleccionando JV02 en el formulario facilitado por el profesor. El formulario se comparte aparte del cuaderno interactivo.
 Alcance
 Usa los conceptos de clase: matriz char, variables, for, do-while, if, Random, Scanner y consola. No se requieren clases adicionales, interfaz gráfica, colecciones ni una partida de varios turnos. Se aceptan soluciones equivalentes sin exigir nombres internos literales.
 Referencia docente
