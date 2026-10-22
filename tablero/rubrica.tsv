@@ -1,0 +1,13 @@
+EJERCICIO	DIRECTORIO	CRITERIO	PUNTOS	TIPO_EVIDENCIA	CONDICIONES
+JV02	src/Main.java	JV02-C1-01 · Matriz y relleno	10	CODIGO	Crea char[10][10] y rellena 100 posiciones con * mediante bucles. Aceptar nombres y bucles equivalentes.
+JV02	src/Main.java	JV02-C1-02 · Jugador y meta	10	CODIGO	Sitúa exactamente una R en [0][0] y una F en [9][9] antes del movimiento.
+JV02	src/Main.java	JV02-C1-03 · Cinco obstáculos y batería sin solapamiento	20	CODIGO	Coloca exactamente cinco X y una B usando coordenadas aleatorias válidas y comprobando que cada destino está libre; no sobrescribe R ni F.
+JV02	src/Main.java	JV02-C1-04 · Impresión del estado generado	10	CODIGO	Muestra el tablero después de colocar elementos: diez filas de diez símbolos separados; conteo esperado 1 R, 1 F, 5 X, 1 B, 92 *.
+JV02	src/Main.java	JV02-C2-01 · Entrada y destino D	5	CODIGO	Lee una única orden con Scanner. D aumenta la columna. Rechaza otras letras sin cambiar el tablero en nivel 2; en nivel 3 también acepta W/A/S.
+JV02	src/Main.java	JV02-C2-02 · Movimiento y obstáculo	5	CODIGO	Valida límites antes de acceder; X bloquea sin cambios. En destino permitido borra origen y dibuja una sola R.
+JV02	src/Main.java	JV02-C2-03 · Batería y vidas	5	CODIGO	Inicia 10 vidas; lee B antes de sobrescribir; la consume, suma 2 y mueve R. No descuenta vidas por movimientos normales o bloqueados.
+JV02	src/Main.java	JV02-C2-04 · Meta y salida final	5	CODIGO	Conserva F hasta alcanzarla; al alcanzarla comunica rescate completado y coloca R allí. Imprime estado final y vidas tras una única orden.
+JV02	src/Main.java	JV02-C3-01 · Cuatro direcciones	10	CODIGO	W resta fila; S suma fila; A resta columna; D suma columna. Procesa solo una orden y conserva las reglas del nivel 2.
+JV02	src/Main.java	JV02-C3-02 · Límites en las cuatro direcciones	10	CODIGO	Comprueba 0 <= fila < 10 y 0 <= columna < 10 antes de acceder o borrar origen. W/A desde [0][0] no modifican el tablero ni causan excepción.
+JV02	src/Main.java	JV02-C3-03 · Coherencia de casos	10	CODIGO	Conserva una sola R; invalidez no altera estado; X bloquea; B suma exactamente 2; F informa de éxito, en cualquiera de las direcciones. No exigir repetir turnos.
+

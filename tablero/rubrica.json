@@ -1,0 +1,106 @@
+{
+  "id": "JV02",
+  "max": 100,
+  "criteria": [
+    {
+      "id": "JV02-C1-01",
+      "level": 1,
+      "criterion": "Matriz y relleno",
+      "points": 10,
+      "evidence": "CODIGO",
+      "conditions": "Crea char[10][10] y rellena 100 posiciones con * mediante bucles. Aceptar nombres y bucles equivalentes.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C1-02",
+      "level": 1,
+      "criterion": "Jugador y meta",
+      "points": 10,
+      "evidence": "CODIGO",
+      "conditions": "Sitúa exactamente una R en [0][0] y una F en [9][9] antes del movimiento.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C1-03",
+      "level": 1,
+      "criterion": "Cinco obstáculos y batería sin solapamiento",
+      "points": 20,
+      "evidence": "CODIGO",
+      "conditions": "Coloca exactamente cinco X y una B usando coordenadas aleatorias válidas y comprobando que cada destino está libre; no sobrescribe R ni F.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C1-04",
+      "level": 1,
+      "criterion": "Impresión del estado generado",
+      "points": 10,
+      "evidence": "CODIGO",
+      "conditions": "Muestra el tablero después de colocar elementos: diez filas de diez símbolos separados; conteo esperado 1 R, 1 F, 5 X, 1 B, 92 *.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C2-01",
+      "level": 2,
+      "criterion": "Entrada y destino D",
+      "points": 5,
+      "evidence": "CODIGO",
+      "conditions": "Lee una única orden con Scanner. D aumenta la columna. Rechaza otras letras sin cambiar el tablero en nivel 2; en nivel 3 también acepta W/A/S.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C2-02",
+      "level": 2,
+      "criterion": "Movimiento y obstáculo",
+      "points": 5,
+      "evidence": "CODIGO",
+      "conditions": "Valida límites antes de acceder; X bloquea sin cambios. En destino permitido borra origen y dibuja una sola R.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C2-03",
+      "level": 2,
+      "criterion": "Batería y vidas",
+      "points": 5,
+      "evidence": "CODIGO",
+      "conditions": "Inicia 10 vidas; lee B antes de sobrescribir; la consume, suma 2 y mueve R. No descuenta vidas por movimientos normales o bloqueados.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C2-04",
+      "level": 2,
+      "criterion": "Meta y salida final",
+      "points": 5,
+      "evidence": "CODIGO",
+      "conditions": "Conserva F hasta alcanzarla; al alcanzarla comunica rescate completado y coloca R allí. Imprime estado final y vidas tras una única orden.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C3-01",
+      "level": 3,
+      "criterion": "Cuatro direcciones",
+      "points": 10,
+      "evidence": "CODIGO",
+      "conditions": "W resta fila; S suma fila; A resta columna; D suma columna. Procesa solo una orden y conserva las reglas del nivel 2.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C3-02",
+      "level": 3,
+      "criterion": "Límites en las cuatro direcciones",
+      "points": 10,
+      "evidence": "CODIGO",
+      "conditions": "Comprueba 0 <= fila < 10 y 0 <= columna < 10 antes de acceder o borrar origen. W/A desde [0][0] no modifican el tablero ni causan excepción.",
+      "directory": "src/Main.java"
+    },
+    {
+      "id": "JV02-C3-03",
+      "level": 3,
+      "criterion": "Coherencia de casos",
+      "points": 10,
+      "evidence": "CODIGO",
+      "conditions": "Conserva una sola R; invalidez no altera estado; X bloquea; B suma exactamente 2; F informa de éxito, en cualquiera de las direcciones. No exigir repetir turnos.",
+      "directory": "src/Main.java"
+    }
+  ]
+}
+

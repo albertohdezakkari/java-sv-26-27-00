@@ -1,0 +1,31 @@
+JV02 · Misión de rescate Java
+Un tablero, tres niveles acumulativos
+Objetivo
+Relacionar matrices, bucles, aleatoriedad y entrada de teclado con el estado de un juego. Un único programa Java procesa una sola orden. El puzle es práctica formativa; no se califica mediante esta rúbrica.
+Entregable
+Un repositorio GitHub: java-mision-03-rescate-nombre-apellido (sustituye nombre y apellido por los tuyos). Contiene src/Main.java, README.md y .gitignore. Un único proyecto incremental. El corrector debe tener permiso de lectura. No se exigen capturas ni vídeos.
+Nivel 1 · Construye la estación · Hasta 5/10
+Crea una matriz char de 10 filas y 10 columnas. Rellena con * mediante bucles. Coloca R en [0][0] y F en [9][9]. Coloca exactamente cinco X (obstáculos) y una B (batería) en posiciones aleatorias libres. Ningún elemento puede sobrescribir otro.
+Imprime después de colocar todos los elementos: diez filas con diez símbolos separados por espacios. El estado inicial debe contener 1 R, 1 F, 5 X, 1 B y 92 *.
+Nivel 2 · Una orden D · Hasta 7/10
+Incluye el nivel 1. Guarda las coordenadas del robot e inicia 10 vidas. Lee una única letra con Scanner; en este nivel se reconoce D mayúscula. Una letra no válida informa y no modifica el estado.
+D aumenta la columna. Calcula y valida el destino antes de acceder a la matriz y antes de borrar el origen. Si está fuera, informa y conserva el estado. Si contiene X, informa de movimiento bloqueado y conserva el estado. Si está libre, borra el origen, actualiza coordenadas y dibuja R. Si contiene B, consume la batería, suma exactamente 2 vidas y mueve R. Si contiene F, muestra Rescate completado y coloca R en la meta. Conserva F mientras no se alcance. Después imprime el tablero final y las vidas. Siempre queda una sola R.
+Nivel 3 · W, A, S y D · Hasta 10/10
+Incluye los niveles 1 y 2. W resta fila; S suma fila; A resta columna; D suma columna. Comprueba los cuatro límites antes de leer el destino. Mantén las reglas de X, B y F. Una orden inválida o un movimiento fuera del tablero no modifica el estado. Solo se solicita una orden: no se requiere bucle de turnos ni partida completa.
+Comprobaciones
+Generación: 1 R + 1 F + 5 X + 1 B + 92 * = 100.
+Destino [0][1] libre y D: robot en [0][1], origen libre, 10 vidas.
+X en [0][1] y D: robot y obstáculo permanecen, 10 vidas.
+B en [0][1] y D: batería consumida, robot en destino, 12 vidas.
+W o A desde [0][0]: no hay acceso inválido ni cambios.
+Entrada Q: informa de error y conserva el estado.
+Robot junto a F y orden hacia F: éxito y una sola R en destino.
+Para probar los casos concretos prepara temporalmente una copia local; restaura la distribución aleatoria antes de la entrega. Desde el inicio no se llega a [9][9] con una sola orden.
+README y entrega
+README breve: Qué he conseguido; Qué parte corresponde a cada Challenge; Qué he modificado; Cómo comprobarlo; Problemas encontrados. Indica el JDK y cómo ejecutar src/Main.java. No se pide una memoria extensa.
+Comprueba, realiza commit y push, y abre src/Main.java en GitHub para verificar la versión publicada. Entrega el enlace del repositorio en el formulario del cuaderno JV02 cuando el profesor lo haya activado. Guardar el enlace en la preview no es una entrega.
+Alcance
+Usa los conceptos de clase: matriz char, variables, for, do-while, if, Random, Scanner y consola. No se requieren clases adicionales, interfaz gráfica, colecciones ni una partida de varios turnos. Se aceptan soluciones equivalentes sin exigir nombres internos literales.
+Referencia docente
+https://github.com/albertohdezakkari/java-sv-01-01-juego-tablero/blob/029dff28c7696b4148784edd8e1e1efcfdecc325/java-sv-01-01-juego-tablero/src/Main.java
+
