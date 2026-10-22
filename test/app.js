@@ -84,10 +84,17 @@ async function sendResult(){
    respuestas:state.order.map((q,i)=>({preguntaId:QUESTIONS[q].id,respuesta:state.answers[i]===null?'':'ABCD'[state.answers[i]],segundos:state.answers[i]===null?SECONDS:Math.min(SECONDS-1,(state.times||[])[i]||0)}))};
  }
  sending=true;state.registration={status:'sending'};save();
- const controller=new AbortController(),limit=setTimeout(()=>controller.abort(),25000);
  try{
-  const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(state.payload),signal:controller.signal});
-  const data=await response.json();
+  const data=await TestLogic.submitWithRetry(async()=>{
+   const controller=new AbortController(),limit=setTimeout(()=>controller.abort(),45000);
+   try{
+    const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(state.payload),signal:controller.signal});
+    if(!response.ok)throw new Error('Registro temporalmente no disponible');
+    const result=await response.json();
+    if(!result.ok&&/lock|bloqueo|too many|timeout|tiempo de espera|simult[aá]ne/i.test(String(result.error||'')))throw new Error('Servidor ocupado');
+    return result;
+   }finally{clearTimeout(limit);}
+  },{onRetry:()=>{const el=document.querySelector('#registration');if(el)el.textContent='El servidor está ocupado. Conservamos tus respuestas y estamos reintentando el guardado…';}});
   if(!data.ok){
    state.registration={status:'rejected',error:String(data.error||'No se ha podido registrar el intento.')};save();
    document.querySelector('#registration').innerHTML='<b>No se ha confirmado el registro.</b><p>'+esc(state.registration.error)+'</p><p>Avisa al profesor para revisar este intento.</p>';return;
@@ -97,7 +104,7 @@ async function sendResult(){
   state.registration={status:'saved',result:r};save();finish();
  }catch{
   state.registration={status:'uncertain'};save();showUncertain();
- }finally{clearTimeout(limit);sending=false;}
+ }finally{sending=false;}
 }
 function showUncertain(){
  const target=document.querySelector('#registration');if(!target)return;
