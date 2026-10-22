@@ -1,0 +1,61 @@
+JV02 · Rúbrica de Misión de rescate Java
+100 puntos · Corrección con evidencias del repositorio
+Reglas de corrección
+Evaluar exclusivamente el enunciado JV02. Aceptar soluciones técnicamente equivalentes y nombres internos diferentes. No exigir interfaces gráficas, clases adicionales, métodos auxiliares, capturas, vídeos ni repetir turnos.
+El repositorio contiene src/Main.java y README.md. La documentación permite interpretar el nivel y reproducir las comprobaciones; no introduce puntos adicionales ni requisitos ajenos al enunciado.
+Usar evidencia del código con ruta y líneas. Un análisis de código permite razonar sobre comportamiento, pero no demuestra una ejecución real. Si no se ejecutó, no afirmar compilación ni pruebas realizadas. Marcar NO VERIFICABLE lo que no pueda comprobarse y derivarlo a revisión, sin inventar resultados. No penalizar dos veces el mismo error raíz.
+Distribución
+Nivel 1: 50 puntos. Nivel 2: 20 puntos adicionales. Nivel 3: 30 puntos adicionales. Total exacto 100. Informar puntuación por criterio y nota sobre 10 (total/10).
+Los hitos 5/7/10 solo se consideran alcanzados cuando funciona el nivel completo y todos los anteriores. Si hay cumplimiento parcial, explicar la puntuación parcial sin declarar conseguido el hito.
+Criterios
+JV02-C1-01 · NIVEL 1 · Matriz y relleno · 10 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Crea char[10][10] y rellena 100 posiciones con * mediante bucles. Aceptar nombres y bucles equivalentes.
+
+JV02-C1-02 · NIVEL 1 · Jugador y meta · 10 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Sitúa exactamente una R en [0][0] y una F en [9][9] antes del movimiento.
+
+JV02-C1-03 · NIVEL 1 · Cinco obstáculos y batería sin solapamiento · 20 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Coloca exactamente cinco X y una B usando coordenadas aleatorias válidas y comprobando que cada destino está libre; no sobrescribe R ni F.
+
+JV02-C1-04 · NIVEL 1 · Impresión del estado generado · 10 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Muestra el tablero después de colocar elementos: diez filas de diez símbolos separados; conteo esperado 1 R, 1 F, 5 X, 1 B, 92 *.
+
+JV02-C2-01 · NIVEL 2 · Entrada y destino D · 5 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Lee una única orden con Scanner. D aumenta la columna. Rechaza otras letras sin cambiar el tablero en nivel 2; en nivel 3 también acepta W/A/S.
+
+JV02-C2-02 · NIVEL 2 · Movimiento y obstáculo · 5 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Valida límites antes de acceder; X bloquea sin cambios. En destino permitido borra origen y dibuja una sola R.
+
+JV02-C2-03 · NIVEL 2 · Batería y vidas · 5 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Inicia 10 vidas; lee B antes de sobrescribir; la consume, suma 2 y mueve R. No descuenta vidas por movimientos normales o bloqueados.
+
+JV02-C2-04 · NIVEL 2 · Meta y salida final · 5 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Conserva F hasta alcanzarla; al alcanzarla comunica rescate completado y coloca R allí. Imprime estado final y vidas tras una única orden.
+
+JV02-C3-01 · NIVEL 3 · Cuatro direcciones · 10 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: W resta fila; S suma fila; A resta columna; D suma columna. Procesa solo una orden y conserva las reglas del nivel 2.
+
+JV02-C3-02 · NIVEL 3 · Límites en las cuatro direcciones · 10 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Comprueba 0 <= fila < 10 y 0 <= columna < 10 antes de acceder o borrar origen. W/A desde [0][0] no modifican el tablero ni causan excepción.
+
+JV02-C3-03 · NIVEL 3 · Coherencia de casos · 10 puntos
+Ruta: src/Main.java. Evidencia: CODIGO.
+Condición: Conserva una sola R; invalidez no altera estado; X bloquea; B suma exactamente 2; F informa de éxito, en cualquiera de las direcciones. No exigir repetir turnos.
+
+Aplicación y feedback
+Para cada criterio indicar CUMPLE, PARCIAL, NO CUMPLE o NO VERIFICABLE, puntuación y evidencia concreta. Las puntuaciones parciales deben justificarse por requisitos satisfechos, sin penalización duplicada.
+Por bloque: PUNTUACIÓN, CORRECTO, A MEJORAR y CONCEPTO A REPASAR.
+Al final: NOTA FINAL /100, NOTA SOBRE 10, FORTALEZAS, PRIORIDADES DE MEJORA, ERROR MÁS IMPORTANTE y SIGUIENTE PASO.
+Seguridad y límites
+No ejecutar código del alumno en Apps Script. El motor existente analiza los archivos autorizados. Si se incorporan pruebas de ejecución en el futuro, deben usar un entorno aislado. No enviar correos ni calificaciones automáticamente durante la prueba de integración.
+
