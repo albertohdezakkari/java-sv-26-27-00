@@ -76,3 +76,10 @@ Engine originally expects GitHub repositories, not pasted code. Adapt `Main.java
 
 ## 9. Project source materials
 ChatGPT project includes files named CUESTIONARIO.txt, PROMPT-CUADRNOS.txt, PROMPT-CUADRNOS-2.txt, RÚBRICA.txt, VISUAL.txt, visual-2.txt, ZIP.txt, CUESTIONARIO-Y-CHALLENGE.txt. They may not be present in the GitHub repo; request them or consult project attachments before changing pedagogical standards. This document summarizes the key requirements but does not replace those source files.
+
+## 10. JV02 rubric page — verified 2026-10-24
+- Published `/rubrica/` as a student-facing HTML page for **JV02 · Misión 03 · Rescate**; this is separate from the older Treasure/Homer challenges described above.
+- The page preserves all 11 criteria and their exact conditions from `tablero/rubrica.json`: level totals 50 + 20 + 30 = 100. Includes cumulative levels, partial credit, evidence rules, /10 conversion, print styling, and links to the notebook, original rubric and existing central GitHub submission Form.
+- Source commit: `49ccb4a119348dc99ad1ac6d618bff6fcc46b8c2`. Pages deployment [40112028947](https://github.com/albertohdezakkari/java-sv-26-27-00/actions/runs/40112028947) completed successfully. Public URL returned HTTP 200 and matched the source HTML byte for byte.
+- Verified: original criterion text and points, level sums, local links and anchors; browser rendered 11 criteria / 100 points without document overflow at 386 px.
+- No changes to grading criteria, Apps Script, Forms, historical grades or existing URLs. The student-facing page distinguishes JV02 /100 in Challenges from the independent quiz /10 in Cuadernos de trabajo.
