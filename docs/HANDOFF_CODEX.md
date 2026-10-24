@@ -89,3 +89,4 @@ ChatGPT project includes files named CUESTIONARIO.txt, PROMPT-CUADRNOS.txt, PROM
 - The 11 original criterion articles remain byte-identical; their points still total 100. Existing URLs, JSON/text rubrics and delivery integrations are unchanged.
 - Native checkboxes are personal reading aids: no stored/transmitted review data, no new points or deliverables. Mobile verification at 390 px has no page overflow; the native reflection disclosure opens correctly.
 - This records source and local checks; a Git commit alone is not proof of a Pages deployment.
+- Public verification completed: the HTML at `https://albertohdezakkari.github.io/java-sv-26-27-00/rubrica/` returned HTTP 200 and matched the source from `2df378468b80ba3ba4246b0d10f84f7d7d85db51` byte for byte. Grading integrations were not exercised or changed in this presentation-only deployment.
