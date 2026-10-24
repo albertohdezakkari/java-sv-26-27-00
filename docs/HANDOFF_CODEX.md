@@ -83,3 +83,9 @@ ChatGPT project includes files named CUESTIONARIO.txt, PROMPT-CUADRNOS.txt, PROM
 - Source commit: `49ccb4a119348dc99ad1ac6d618bff6fcc46b8c2`. Pages deployment [40112028947](https://github.com/albertohdezakkari/java-sv-26-27-00/actions/runs/40112028947) completed successfully. Public URL returned HTTP 200 and matched the source HTML byte for byte.
 - Verified: original criterion text and points, level sums, local links and anchors; browser rendered 11 criteria / 100 points without document overflow at 386 px.
 - No changes to grading criteria, Apps Script, Forms, historical grades or existing URLs. The student-facing page distinguishes JV02 /100 in Challenges from the independent quiz /10 in Cuadernos de trabajo.
+
+## 11. Rubric reading and comprehension aids — 2026-10-24
+- `/rubrica/` adds an Anticipate → Contrast → Explain and improve reading route, plus one optional reflection pause per level. Level 3 has an accessible diagram linking W/A/S/D to row/column changes.
+- The 11 original criterion articles remain byte-identical; their points still total 100. Existing URLs, JSON/text rubrics and delivery integrations are unchanged.
+- Native checkboxes are personal reading aids: no stored/transmitted review data, no new points or deliverables. Mobile verification at 390 px has no page overflow; the native reflection disclosure opens correctly.
+- This records source and local checks; a Git commit alone is not proof of a Pages deployment.
