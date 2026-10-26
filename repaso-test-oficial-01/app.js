@@ -5,7 +5,11 @@ const STORE = 'repaso_test_oficial_01_v2';
 const SECONDS = 90;
 const TOTAL = QUESTIONS.length;
 const LETTERS = 'ABCD';
+const REGISTRATION_ENDPOINT = '';
 const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const registrationNotice = REGISTRATION_ENDPOINT
+  ? 'La cuenta elegida no verifica tu identidad. Al finalizar se enviarán al registro docente el correo seleccionado, tus respuestas, la puntuación y los tiempos.'
+  : 'Seleccionar una cuenta no verifica quién la utiliza. La selección y tus respuestas se guardan solo en este navegador; este test no envía la nota al registro del profesor.';
 let state = null;
 let timer = null;
 try {
@@ -26,7 +30,7 @@ function intro() {
   clearInterval(timer);
   state = null;
   try { localStorage.removeItem(STORE); } catch {}
-  shell(`<section class="hero"><div class="eyebrow">Lectura y depuración de código</div><h1>Repaso tipo test oficial 01</h1><p class="lead">Las 15 preguntas tipo test del examen de repaso. Dispones de <b>90 segundos para cada pregunta</b>.</p></section><section class="panel instructions"><p><b>Cómo funciona:</b> responde una pregunta cada vez. Al elegir una opción, tu respuesta queda bloqueada y aparece la corrección. Pulsa <b>Siguiente</b> para cargar la próxima pregunta. También puedes revisar preguntas anteriores, pero no cambiar sus respuestas.</p><p>Si se agota el tiempo, cuenta como pregunta sin responder y podrás continuar. No se resta por error.</p><div class="identity"><label for="student">Elige tu cuenta del colegio</label><select id="student" required><option value="">Selecciona tu correo…</option>${ACCOUNTS.map(email => `<option value="${esc(email)}">${esc(email)}</option>`).join('')}</select><p class="hint">Seleccionar una cuenta no verifica quién la utiliza. La selección y tus respuestas se guardan solo en este navegador; este test no envía la nota al registro del profesor.</p></div><div class="actions"><span class="hint">15 preguntas · 90 segundos por pregunta</span><button class="btn" id="start">Empezar →</button></div></section>`);
+  shell(`<section class="hero"><div class="eyebrow">Lectura y depuración de código</div><h1>Repaso tipo test oficial 01</h1><p class="lead">Las 15 preguntas tipo test del examen de repaso. Dispones de <b>90 segundos para cada pregunta</b>.</p></section><section class="panel instructions"><p><b>Cómo funciona:</b> responde una pregunta cada vez. Al elegir una opción, tu respuesta queda bloqueada y aparece la corrección. Pulsa <b>Siguiente</b> para cargar la próxima pregunta. También puedes revisar preguntas anteriores, pero no cambiar sus respuestas.</p><p>Si se agota el tiempo, cuenta como pregunta sin responder y podrás continuar. No se resta por error.</p><div class="identity"><label for="student">Elige tu cuenta del colegio</label><select id="student" required><option value="">Selecciona tu correo…</option>${ACCOUNTS.map(email => `<option value="${esc(email)}">${esc(email)}</option>`).join('')}</select><p class="hint">${registrationNotice}</p></div><div class="actions"><span class="hint">15 preguntas · 90 segundos por pregunta</span><button class="btn" id="start">Empezar →</button></div></section>`);
   APP.querySelector('#start').onclick = () => {
     const email = APP.querySelector('#student').value;
     if (email && ACCOUNTS.includes(email)) start(email);
@@ -41,7 +45,7 @@ function shuffle(values) {
 }
 function start(email) {
   state = {quiz:QUIZ, student:email, phase:'question', order:shuffle(QUESTIONS.map((_, i) => i)), index:0,
-    answers:Array(TOTAL).fill(undefined), startedAt:Date.now(), deadline:Date.now() + SECONDS * 1000};
+    attemptId:crypto.randomUUID(), answers:Array(TOTAL).fill(null), times:Array(TOTAL).fill(0), startedAt:Date.now(), deadline:Date.now() + SECONDS * 1000};
   save();
   renderQuestion();
 }
@@ -74,6 +78,7 @@ function lockAnswer(choice) {
   clearInterval(timer);
   const seconds = remaining();
   state.answers[state.index] = seconds === 0 ? null : choice;
+  state.times[state.index] = Math.min(SECONDS, Math.max(0, SECONDS - seconds));
   state.frozen = seconds;
   state.phase = 'feedback';
   save();
@@ -139,8 +144,39 @@ function renderResult() {
   const correct = ordered.reduce((count, question, i) => count + (state.answers[i] === question.answer ? 1 : 0), 0);
   const blank = state.answers.filter(answer => answer === null || answer === undefined).length;
   const wrong = TOTAL - correct - blank;
-  shell(`<section class="hero"><div class="eyebrow">Intento terminado</div><h1>Tu resultado</h1><p class="lead">${state.student ? `Cuenta seleccionada: ${esc(state.student)} · ` : ''}${Math.max(0, Math.round((state.finishedAt - state.startedAt) / 1000))} segundos</p></section><section class="panel"><div class="score">${(correct / TOTAL * 10).toLocaleString('es-ES', {minimumFractionDigits:1, maximumFractionDigits:1})}<span style="font-size:.28em"> / 10</span></div><div class="stats"><div class="stat"><b>${correct}</b>Aciertos</div><div class="stat"><b>${wrong}</b>Errores</div><div class="stat"><b>${blank}</b>Sin responder</div></div><p class="notice">Este resultado se ha guardado en el navegador de este dispositivo. No se ha enviado al registro del profesor.</p><section class="review"><h2>Corrección comentada</h2>${ordered.map((question, i) => `<article class="review-item"><div class="eyebrow">${String(i + 1).padStart(2, '0')} · ${esc(question.topic)}</div><h3>${esc(question.question)}</h3>${question.code ? `<pre class="code"><code>${esc(question.code)}</code></pre>` : ''}<p class="${state.answers[i] === question.answer ? 'good' : 'badtext'}">Tu respuesta: ${state.answers[i] === null || state.answers[i] === undefined ? 'Sin responder' : `${LETTERS[state.answers[i]]} · ${esc(question.options[state.answers[i]])}`}</p><p class="good">Correcta: ${LETTERS[question.answer]} · ${esc(question.options[question.answer])}</p><p>${esc(question.explanation)}</p></article>`).join('')}</section><div class="actions"><span class="hint">Clave docente guardada aparte en data/soluciones-docente.json.</span><button class="btn" id="again">Hacer otro intento →</button></div></section>`);
+  if (!state.result) state.result = {correct, wrong, blank, grade: Math.round(correct / TOTAL * 1000) / 100};
+  if (!state.finishedAt) state.finishedAt = Date.now();
+  save();
+  if (state.registration === 'sending') state.registration = null;
+  const registrationText = !REGISTRATION_ENDPOINT ? 'Este intento se conserva en el navegador. El registro central aún no está activado.' : state.registration === 'saved' ? '✓ Intento guardado en el registro del profesor.' : state.registration === 'uncertain' ? 'No se ha podido confirmar el guardado.' : 'Enviando el intento al registro del profesor…';
+  shell(`<section class="hero"><div class="eyebrow">Intento terminado</div><h1>Tu resultado</h1><p class="lead">${state.student ? `Cuenta seleccionada: ${esc(state.student)} · ` : ''}${Math.max(0, Math.round((state.finishedAt - state.startedAt) / 1000))} segundos</p></section><section class="panel"><div class="score">${Number(state.result.grade).toLocaleString('es-ES', {minimumFractionDigits:1, maximumFractionDigits:1})}<span style="font-size:.28em"> / 10</span></div><div class="stats"><div class="stat"><b>${state.result.correct}</b>Aciertos</div><div class="stat"><b>${state.result.wrong}</b>Errores</div><div class="stat"><b>${state.result.blank}</b>Sin responder</div></div><p class="notice" id="registration-status">${registrationText}</p>${REGISTRATION_ENDPOINT && state.registration === 'uncertain' ? '<button class="btn secondary" id="retry-save">Reintentar envío</button>' : ''}<section class="review"><h2>Corrección comentada</h2>${ordered.map((question, i) => `<article class="review-item"><div class="eyebrow">${String(i + 1).padStart(2, '0')} · ${esc(question.topic)}</div><h3>${esc(question.question)}</h3>${question.code ? `<pre class="code"><code>${esc(question.code)}</code></pre>` : ''}<p class="${state.answers[i] === question.answer ? 'good' : 'badtext'}">Tu respuesta: ${state.answers[i] === null || state.answers[i] === undefined ? 'Sin responder' : `${LETTERS[state.answers[i]]} · ${esc(question.options[state.answers[i]])}`}</p><p class="good">Correcta: ${LETTERS[question.answer]} · ${esc(question.options[question.answer])}</p><p>${esc(question.explanation)}</p></article>`).join('')}</section><div class="actions"><span class="hint">Clave docente guardada aparte en data/soluciones-docente.json.</span><button class="btn" id="again" ${REGISTRATION_ENDPOINT && state.registration !== 'saved' ? 'disabled' : ''}>Hacer otro intento →</button></div></section>`);
   APP.querySelector('#again').onclick = intro;
+  APP.querySelector('#retry-save')?.addEventListener('click',()=>{state.registration=null;sendResult();});
+  if (REGISTRATION_ENDPOINT && state.registration !== 'saved' && state.registration !== 'uncertain') sendResult();
+}
+async function sendResult() {
+  if (!state || !REGISTRATION_ENDPOINT || ['sending','saved','uncertain'].includes(state.registration)) return;
+  state.registration = 'sending';
+  save();
+  const payload = {action:'quiz',quiz:QUIZ,attemptId:state.attemptId,alumno:state.student,email:state.student,grupo:'1SI-JAVA',tiempoTotal:Math.max(0,Math.round((state.finishedAt-state.startedAt)/1000)),respuestas:state.order.map((q,i)=>({preguntaId:QUESTIONS[q].id,respuesta:state.answers[i]===null?'':'ABCD'[state.answers[i]],segundos:state.times?.[i]??90}))};
+  try {
+    const response = await fetch(REGISTRATION_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    if (!response.ok) throw new Error('Error HTTP '+response.status);
+    const result = await response.json();
+    if (!result.ok || result.attemptId !== state.attemptId) throw new Error(result.error || 'Respuesta de registro no válida');
+    state.registration = 'saved';
+    save();
+    const status = APP.querySelector('#registration-status');
+    if (status) status.textContent = '✓ Intento guardado en el registro del profesor.';
+    const again = APP.querySelector('#again');
+    if (again) again.disabled = false;
+  } catch {
+    state.registration = 'uncertain';
+    save();
+    const status = APP.querySelector('#registration-status');
+    if (status) status.innerHTML = 'No se ha podido confirmar el guardado. Tus respuestas siguen en este navegador. <button class="btn secondary" id="retry-save">Reintentar envío</button>';
+    APP.querySelector('#retry-save')?.addEventListener('click',()=>{state.registration=null;sendResult();});
+  }
 }
 if (state) {
   if (state.phase === 'result') renderResult();
