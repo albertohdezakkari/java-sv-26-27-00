@@ -1,13 +1,97 @@
 {
   "quiz": "1SI-JAVA-REPASO-OFICIAL-01",
   "titulo": "Repaso tipo test oficial 01 · Clave docente",
-  "uso": "Archivo de trabajo docente. No se carga en la página del alumnado.",
+  "uso": "Clave docente separada, alineada con las 15 preguntas del banco.",
   "questions": [
-    {"id":"RTO01Q01","source":"Examen de repaso Java · pregunta 8","answer":"D","explanation":"Los arrays de longitud 10 tienen índices del 0 al 9. La expresión a1[10] provoca ArrayIndexOutOfBoundsException al evaluarse la condición del primer if, antes de cualquier impresión."},
-    {"id":"RTO01Q02","source":"Examen de repaso Java · pregunta 9","answer":"D","explanation":"En cada vuelta x pasa de 0 a 1 dentro del cuerpo y la actualización x-- la devuelve a 0. La condición x < 4 siempre es verdadera, por lo que el bucle no termina."},
-    {"id":"RTO01Q03","source":"Examen de repaso Java · pregunta 14","answer":"D","explanation":"La variable local x ya está declarada en el método main. Java no permite volver a declararla dentro del bloque anidado del for; el fragmento no compila."},
-    {"id":"RTO01Q04","source":"Examen de repaso Java · pregunta 2","answer":"D","explanation":"Primero se calcula 6 * 12 = 72 y 327 - 6 / 2 = 324. La comparación 72 < 324 es true, pero true && false da false."},
-    {"id":"RTO01Q05","source":"Examen de repaso Java · pregunta 11","answer":"A","explanation":"Tras la segunda llamada, bal vale -100. show comprueba ese valor compartido y muestra cada posición del array: Pepe y Luis, ambos con saldo -100.0."},
-    {"id":"RTO01Q06","source":"Examen de repaso Java · pregunta 6","answer":"A","explanation":"Java pasa los valores primitivos por valor. Las asignaciones a los parámetros b y c dentro de a no cambian i ni z en main; se imprime 3 2."}
+    {
+      "id": "RTO01Q01",
+      "source": "Examen de repaso Java · pregunta 1",
+      "answer": "A",
+      "explanation": "La opción A declara la variable como array de enteros, reserva n posiciones con new int[n] y después lee datos[0]. Las otras opciones tienen un tipo incorrecto, usan una variable local sin inicializar o no indican la longitud del array."
+    },
+    {
+      "id": "RTO01Q02",
+      "source": "Examen de repaso Java · pregunta 2",
+      "answer": "D",
+      "explanation": "La precedencia hace que 6 * 12 valga 72 y 327 - 6 / 2 valga 324. La comparación 72 < 324 es true; después true && false da false."
+    },
+    {
+      "id": "RTO01Q03",
+      "source": "Examen de repaso Java · pregunta 3",
+      "answer": "B",
+      "explanation": "La versión A tiene retorno void e imprime el argumento. La versión B tiene retorno int y devuelve el valor; no lo imprime."
+    },
+    {
+      "id": "RTO01Q04",
+      "source": "Examen de repaso Java · pregunta 4",
+      "answer": "B",
+      "explanation": "Las condiciones que aparecen en while, do-while y for deben ser booleanas. En for se puede omitir la condición; un for sin condición de salida puede continuar indefinidamente. do-while evalúa después del cuerpo, por eso A es falsa."
+    },
+    {
+      "id": "RTO01Q05",
+      "source": "Examen de repaso Java · pregunta 5",
+      "answer": "D",
+      "explanation": "if evalúa una condición booleana. En Java 8 el switch tradicional admite los tipos enumerados en la opción D. break suele evitar la continuación al caso siguiente, pero no es obligatorio en todos los casos."
+    },
+    {
+      "id": "RTO01Q06",
+      "source": "Examen de repaso Java · pregunta 6",
+      "answer": "A",
+      "explanation": "Java pasa los valores primitivos por valor. Las asignaciones a b y c modifican las copias de los argumentos dentro de a, no i ni z en main. i vale 3 y z vale 2."
+    },
+    {
+      "id": "RTO01Q07",
+      "source": "Examen de repaso Java · pregunta 7",
+      "answer": "B",
+      "explanation": "modificaElementos se llama tres veces y en cada llamada incrementa numElementos. Los métodos estáticos sí pueden acceder a campos estáticos."
+    },
+    {
+      "id": "RTO01Q08",
+      "source": "Examen de repaso Java · pregunta 8",
+      "answer": "D",
+      "explanation": "Un array de longitud 10 tiene índices de 0 a 9. El acceso a a1[10] lanza ArrayIndexOutOfBoundsException al evaluar la primera condición; por tanto, no se imprime ninguna línea."
+    },
+    {
+      "id": "RTO01Q09",
+      "source": "Examen de repaso Java · pregunta 9",
+      "answer": "D",
+      "explanation": "Cada vuelta empieza con x = 0, el cuerpo lo incrementa a 1 y la actualización del for lo decrementa a 0. La condición x < 4 nunca deja de cumplirse."
+    },
+    {
+      "id": "RTO01Q10",
+      "source": "Examen de repaso Java · pregunta 10",
+      "answer": "C",
+      "explanation": "El primer bucle copia cada elemento de a2 sobre la posición correspondiente de a1. Todos los elementos de a2 son 0, así que a1 queda lleno de ceros."
+    },
+    {
+      "id": "RTO01Q11",
+      "source": "Examen de repaso Java · pregunta 11",
+      "answer": "A",
+      "explanation": "bal es un campo estático compartido y queda en -100 tras la segunda llamada. show comprueba ese mismo saldo para ambas posiciones e imprime los nombres Pepe y Luis, ambos con -100.0."
+    },
+    {
+      "id": "RTO01Q12",
+      "source": "Examen de repaso Java · pregunta 12",
+      "answer": "D",
+      "explanation": "contador se incrementa una vez en cada una de las 100 iteraciones. La instrucción está fuera del if, así que su valor final es 100."
+    },
+    {
+      "id": "RTO01Q13",
+      "source": "Examen de repaso Java · pregunta 13",
+      "answer": "D",
+      "explanation": "El array contiene 0, 3, 4, 5 y 6. El bucle los imprime seguidos y luego imprime el punto: 03456."
+    },
+    {
+      "id": "RTO01Q14",
+      "source": "Examen de repaso Java · pregunta 14",
+      "answer": "D",
+      "explanation": "La variable local x ya está declarada en el método. No se puede declarar otra x en el bloque anidado del for dentro de ese mismo ámbito."
+    },
+    {
+      "id": "RTO01Q15",
+      "source": "Examen de repaso Java · pregunta 15",
+      "answer": "C",
+      "explanation": "i y z son campos estáticos, no parámetros locales. Antes de llamar a a valen i = 3 y z = 2. El método asigna i = 3 y después z = b * i = 2 * 3 = 6."
+    }
   ]
 }

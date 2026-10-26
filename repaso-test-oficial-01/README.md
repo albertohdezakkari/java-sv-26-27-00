@@ -1,6 +1,6 @@
 # Repaso tipo test oficial 01
 
-Actividad formativa de seis preguntas tomadas del examen de repaso Java y enfocadas en lectura de errores. El límite es de 90 segundos para todo el intento; el orden se aleatoriza. Se muestra una explicación después de cada respuesta y una revisión completa al final.
+Actividad formativa con las 15 preguntas tipo test del examen de repaso Java y sus cuatro opciones originales. El límite actual es de 90 segundos para todo el intento; el orden se aleatoriza. Se muestra una explicación después de cada respuesta y una revisión completa al final.
 
 - Ruta prevista en GitHub Pages: `/repaso-test-oficial-01/`.
 - Identificador de quiz reservado: `1SI-JAVA-REPASO-OFICIAL-01`.
