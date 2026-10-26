@@ -1,0 +1,13 @@
+{
+  "quiz": "1SI-JAVA-REPASO-OFICIAL-01",
+  "titulo": "Repaso tipo test oficial 01 · Clave docente",
+  "uso": "Archivo de trabajo docente. No se carga en la página del alumnado.",
+  "questions": [
+    {"id":"RTO01Q01","source":"Examen de repaso Java · pregunta 8","answer":"D","explanation":"Los arrays de longitud 10 tienen índices del 0 al 9. La expresión a1[10] provoca ArrayIndexOutOfBoundsException al evaluarse la condición del primer if, antes de cualquier impresión."},
+    {"id":"RTO01Q02","source":"Examen de repaso Java · pregunta 9","answer":"D","explanation":"En cada vuelta x pasa de 0 a 1 dentro del cuerpo y la actualización x-- la devuelve a 0. La condición x < 4 siempre es verdadera, por lo que el bucle no termina."},
+    {"id":"RTO01Q03","source":"Examen de repaso Java · pregunta 14","answer":"D","explanation":"La variable local x ya está declarada en el método main. Java no permite volver a declararla dentro del bloque anidado del for; el fragmento no compila."},
+    {"id":"RTO01Q04","source":"Examen de repaso Java · pregunta 2","answer":"D","explanation":"Primero se calcula 6 * 12 = 72 y 327 - 6 / 2 = 324. La comparación 72 < 324 es true, pero true && false da false."},
+    {"id":"RTO01Q05","source":"Examen de repaso Java · pregunta 11","answer":"A","explanation":"Tras la segunda llamada, bal vale -100. show comprueba ese valor compartido y muestra cada posición del array: Pepe y Luis, ambos con saldo -100.0."},
+    {"id":"RTO01Q06","source":"Examen de repaso Java · pregunta 6","answer":"A","explanation":"Java pasa los valores primitivos por valor. Las asignaciones a los parámetros b y c dentro de a no cambian i ni z en main; se imprime 3 2."}
+  ]
+}
