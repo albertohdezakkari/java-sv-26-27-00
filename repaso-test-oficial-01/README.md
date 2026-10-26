@@ -4,6 +4,7 @@ Actividad formativa de seis preguntas tomadas del examen de repaso Java y enfoca
 
 - Ruta prevista en GitHub Pages: `/repaso-test-oficial-01/`.
 - Identificador de quiz reservado: `1SI-JAVA-REPASO-OFICIAL-01`.
+- Selector de cuenta escolar (censo 1SI): `data/cuentas.js`. Las cuentas se publican como opciones en el código de esta página; seleccionar una no autentica su titular.
 - Clave docente separada: `data/soluciones-docente.json`.
 - Preguntas y lógica: `data/preguntas.js` y `app.js`.
 

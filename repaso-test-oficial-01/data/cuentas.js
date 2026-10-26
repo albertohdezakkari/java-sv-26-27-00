@@ -1,0 +1,33 @@
+'use strict';
+// Cuentas del censo de 1SI-JAVA para que cada estudiante seleccione su dirección escolar.
+const ACCOUNTS = [
+  "a25041@svalero.com",
+  "a30211@svalero.com",
+  "a30212@svalero.com",
+  "a28113@svalero.com",
+  "a30213@svalero.com",
+  "a30214@svalero.com",
+  "a30215@svalero.com",
+  "a30216@svalero.com",
+  "a30510@svalero.com",
+  "a30217@svalero.com",
+  "a30345@svalero.com",
+  "a30218@svalero.com",
+  "a30380@svalero.com",
+  "a30219@svalero.com",
+  "a30220@svalero.com",
+  "a28121@svalero.com",
+  "a29319@svalero.com",
+  "a30221@svalero.com",
+  "a28185@svalero.com",
+  "a29889@svalero.com",
+  "a30222@svalero.com",
+  "a28459@svalero.com",
+  "a30223@svalero.com",
+  "a24978@svalero.com",
+  "a30224@svalero.com",
+  "a30326@svalero.com",
+  "a30225@svalero.com",
+  "a29423@svalero.com",
+  "a30226@svalero.com"
+];
