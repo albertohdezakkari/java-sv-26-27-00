@@ -46,9 +46,9 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     });
 });
 
-fases.forEach((fase, index) => {
+[...fases, ...fundamentos].forEach((fase, index) => {
     const viewer = document.querySelector('[data-example="' + fase.id + '"]');
-    const example = archivoDeEjemplo(index);
+    const example = fase.file ?? archivoDeEjemplo(index);
     const pageSize = 14;
     let page = 0;
     viewer.innerHTML = `
@@ -148,3 +148,26 @@ tablero.forEach((fila, filaIndex) => {
     });
 });
 document.querySelector('#outside').addEventListener('click', () => consult(-1, 0));
+
+const traceStep = document.querySelector('#trace-step');
+const traceCode = document.querySelector('#trace-code');
+const traceDescription = document.querySelector('#trace-description');
+const traceBack = document.querySelector('#trace-back');
+const traceNext = document.querySelector('#trace-next');
+const traceReset = document.querySelector('#trace-reset');
+let traceIndex = 0;
+
+function renderTrace() {
+    const [line, description] = recorrido[traceIndex];
+    traceStep.textContent = 'Paso ' + (traceIndex + 1) + ' de ' + recorrido.length;
+    traceCode.textContent = line;
+    traceDescription.textContent = description;
+    traceBack.disabled = traceIndex === 0;
+    traceReset.disabled = traceIndex === 0;
+    traceNext.disabled = traceIndex === recorrido.length - 1;
+}
+
+traceBack.addEventListener('click', () => { traceIndex--; renderTrace(); });
+traceNext.addEventListener('click', () => { traceIndex++; renderTrace(); });
+traceReset.addEventListener('click', () => { traceIndex = 0; renderTrace(); });
+renderTrace();

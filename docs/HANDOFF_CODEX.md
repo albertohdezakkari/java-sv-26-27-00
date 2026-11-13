@@ -102,4 +102,4 @@ ChatGPT project includes files named CUESTIONARIO.txt, PROMPT-CUADRNOS.txt, PROM
 ## 13. Métodos en Java sobre el tablero de clase — 2026-11-13
 - `/tablero/metodos/` adds a formative practice linked from the existing notebook. It uses the classroom board's symbols and extracts printing, counting free cells and checking a coordinate into three methods.
 - The notebook shows cumulative examples using a small fixed matrix. Students apply the methods in their own project and test movement against a free cell, an obstacle and an edge.
-- Check the publication at the live Pages URL and compare the four assets with the source commit.
+- The introductory tabs cover declaration and invocation, signature, execution flow, arguments, return values and mutation before students open their game. The same page links the theory to the original board practice.

@@ -74,3 +74,13 @@ pre {
 [data-symbol="P"] { background: #ffecd9; }
 [data-symbol="F"] { background: #e6ecff; }
 output { display: block; margin-top: .65rem; overflow-wrap: anywhere; font-family: monospace; }
+
+.trace {
+    max-width: 47rem;
+    padding: .75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: .55rem;
+    background: #eef3fa;
+}
+#trace-step { color: #466079; font-size: .9rem; font-weight: 650; }
+#trace-code { font-size: 1rem; font-weight: 650; }

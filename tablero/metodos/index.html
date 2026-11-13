@@ -14,11 +14,15 @@
       <a href="../">← Del código al tablero</a>
       <p class="group">1SI · Programación Java</p>
       <h1>Tu tablero, por métodos</h1>
-      <p class="intro">Abre el juego que ya hiciste. Vas a extraer tareas de <code>main</code> para mostrar el tablero, contar casillas libres y decidir si puedes mover al jugador.</p>
+      <p class="intro">Aprende a escribir y llamar a un método con ejemplos cortos. Después aplica lo aprendido al juego que ya hiciste.</p>
     </header>
     <nav aria-label="Pasos de la práctica">
       <div role="tablist" aria-label="Pasos" id="steps">
-        <button role="tab" id="tab-inicio" aria-controls="inicio" aria-selected="true">Conceptos</button>
+        <button role="tab" id="tab-intro" aria-controls="intro" aria-selected="true">Qué son</button>
+        <button role="tab" id="tab-firma" aria-controls="firma" aria-selected="false" tabindex="-1">Escritura y firma</button>
+        <button role="tab" id="tab-flujo" aria-controls="flujo" aria-selected="false" tabindex="-1">Cómo se ejecutan</button>
+        <button role="tab" id="tab-datos" aria-controls="datos" aria-selected="false" tabindex="-1">Entrada y salida</button>
+        <button role="tab" id="tab-inicio" aria-controls="inicio" aria-selected="false" tabindex="-1">Abre tu juego</button>
         <button role="tab" id="tab-mostrar" aria-controls="mostrar" aria-selected="false" tabindex="-1">Mostrar</button>
         <button role="tab" id="tab-contar" aria-controls="contar" aria-selected="false" tabindex="-1">Contar</button>
         <button role="tab" id="tab-consultar" aria-controls="consultar" aria-selected="false" tabindex="-1">Consultar</button>
@@ -26,15 +30,77 @@
       </div>
     </nav>
 
-    <section role="tabpanel" id="inicio" aria-labelledby="tab-inicio" tabindex="0">
+    <section role="tabpanel" id="intro" aria-labelledby="tab-intro" tabindex="0">
+      <h2>Un método reúne instrucciones con un nombre</h2>
+      <p>Declaras el método una vez y lo llamas cada vez que necesitas esa tarea. Puedes usar la misma tarea con datos diferentes. Por ejemplo, <code>sumar(4, 3)</code> calcula 7 y <code>sumar(10, 2)</code> calcula 12.</p>
+      <dl class="contracts">
+        <div><dt>Procedimiento · <code>static void mostrarTotal(int total)</code></dt><dd>Recibe un número y escribe un mensaje en la consola. <code>void</code> indica que la llamada termina sin devolver un valor.</dd></div>
+        <div><dt>Función · <code>static int sumar(int a, int b)</code></dt><dd>Recibe dos números y devuelve un entero con <code>return</code>. Puedes guardar el resultado, combinarlo con otro cálculo o pasarlo a otro método.</dd></div>
+      </dl>
+      <p>En Java los dos se llaman <strong>métodos</strong>. Si vienes de PSeInt, reconoce la misma idea que en un subproceso con resultado y uno que realiza una acción sin devolverlo.</p>
+      <div class="viewer" data-example="fundamentos"></div>
+      <p class="check"><strong>Antes de avanzar.</strong> Abre «Archivo entero». Localiza las dos llamadas a <code>sumar</code> y predice qué líneas escribirá <code>mostrarTotal</code>. Comprueba que los dos resultados son <code>Total: 7</code> y <code>Total: 12</code>.</p>
+    </section>
+
+    <section role="tabpanel" id="firma" aria-labelledby="tab-firma" tabindex="0" hidden>
+      <h2>Lee una declaración pieza a pieza</h2>
+      <p>Dentro de la clase <code>Main</code>, escribe los métodos después de la llave que cierra <code>main</code> y antes de la última llave de la clase. La llamada se escribe dentro de <code>main</code> o de otro método.</p>
+      <div class="viewer" data-example="firma"></div>
+      <dl class="contracts">
+        <div><dt><code>static</code></dt><dd>El método pertenece a la clase. Aquí puedes llamarlo directamente desde <code>main</code>, que también es <code>static</code>.</dd></div>
+        <div><dt><code>int</code> delante del nombre</dt><dd>Tipo de retorno. La llamada produce un entero. Para una acción sin valor de retorno, escribe <code>void</code>.</dd></div>
+        <div><dt><code>sumar</code> y <code>(int a, int b)</code></dt><dd>Nombre y lista de parámetros. Cada parámetro lleva su tipo y su nombre. Si el método tiene cero parámetros, escribe <code>()</code>, como en la declaración <code>static void mostrarInicio()</code> y la llamada <code>mostrarInicio();</code>.</dd></div>
+        <div><dt><code>{ return a + b; }</code></dt><dd>Cuerpo. Las llaves delimitan las instrucciones. <code>return</code> evalúa la suma, entrega el valor y termina la llamada.</dd></div>
+      </dl>
+      <h3>La firma identifica el método</h3>
+      <p>La firma de este ejemplo es <code>sumar(int, int)</code>. En estos métodos, la forman el nombre y los tipos de sus parámetros en orden. El tipo de retorno, <code>static</code> y los nombres <code>a</code> y <code>b</code> quedan fuera de la firma.</p>
+      <p><code>sumar(int)</code> y <code>sumar(int, int)</code> pueden coexistir porque tienen firmas distintas. Cambiar solo <code>int</code> por <code>double</code> delante de <code>sumar</code> produce dos declaraciones con la misma firma.</p>
+      <p class="check"><strong>Antes de avanzar.</strong> Escribe la firma de <code>mostrarTotal</code> y la de <code>main</code>. Comprueba que quedan <code>mostrarTotal(int)</code> y <code>main(String[])</code>.</p>
+    </section>
+
+    <section role="tabpanel" id="flujo" aria-labelledby="tab-flujo" tabindex="0" hidden>
+      <h2>Sigue la llamada y el regreso a <code>main</code></h2>
+      <p>Usa «Siguiente paso» para seguir la primera llamada de cada método. Fíjate en cuándo se guarda el valor y cuándo aparece texto en la consola.</p>
+      <div class="trace">
+        <p id="trace-step"></p>
+        <p><code id="trace-code"></code></p>
+        <p id="trace-description" aria-live="polite"></p>
+        <div class="controls">
+          <button id="trace-back">← Paso anterior</button>
+          <button id="trace-next">Siguiente paso →</button>
+          <button id="trace-reset">Volver al inicio</button>
+        </div>
+      </div>
+      <p>Un <code>return valor;</code> termina la llamada en ese punto. Cada camino que completa un método con resultado debe llegar a un <code>return</code> con un valor compatible. Si un <code>if</code> solo devuelve un valor cuando su condición es verdadera, comprueba también qué devuelve cuando es falsa. Un método <code>void</code> vuelve al llegar a la última llave o al ejecutar <code>return;</code>.</p>
+      <p class="check"><strong>Antes de avanzar.</strong> Sigue el recorrido hasta la consola. Debes ver que <code>resultado</code> vale 7 antes de que <code>mostrarTotal</code> imprima la primera línea. Predice qué argumentos se usan para obtener 12.</p>
+    </section>
+
+    <section role="tabpanel" id="datos" aria-labelledby="tab-datos" tabindex="0" hidden>
+      <h2>Qué entra, qué sale y qué cambia</h2>
+      <dl class="contracts">
+        <div><dt>Entrada · parámetros y argumentos</dt><dd><code>int a</code> y <code>int b</code> son parámetros de la declaración. <code>4</code> y <code>3</code> son argumentos de <code>sumar(4, 3)</code>. Java asigna los argumentos por posición, con tipos compatibles. En <code>restar(8, 3)</code>, invertir los argumentos cambia el resultado de 5 a −5. Un argumento también puede ser una variable o una expresión.</dd></div>
+        <div><dt>Salida · valor de retorno</dt><dd>La salida de <code>sumar(4, 3)</code> es <code>7</code>. <code>int resultado = sumar(4, 3);</code> guarda ese valor. <code>System.out.println(sumar(4, 3));</code> lo muestra directamente. En Java, el resultado explícito sale por <code>return</code>; la lista de parámetros recibe los datos de entrada.</dd></div>
+        <div><dt>Efecto · consola o cambios en un objeto</dt><dd><code>mostrarTotal(7)</code> escribe en consola. Un método <code>void</code> también puede modificar una casilla de una matriz que recibe. La escritura y la modificación son efectos de la llamada.</dd></div>
+      </dl>
+      <p>Java pasa los argumentos por valor. Con <code>int</code>, el parámetro recibe una copia del número. Con una matriz, recibe una copia de la referencia a la misma matriz: puedes modificar una casilla y ver el cambio desde <code>main</code>. Los parámetros y las variables locales pertenecen a su método.</p>
+      <div class="viewer" data-example="datos"></div>
+      <p class="check"><strong>Antes de avanzar.</strong> Predice qué valores imprimirá el ejemplo completo. Comprueba que salen <code>4</code> y <code>P</code>. Explica cómo puede cambiar la casilla con un método <code>void</code>.</p>
+      <h3>Localiza tres errores al leer código</h3>
+      <ul>
+        <li><code>sumar(4)</code> proporciona un solo argumento. La declaración del ejemplo pide dos.</li>
+        <li><code>int x = mostrarTotal(7);</code> intenta guardar el resultado de una llamada <code>void</code>. Escribe <code>mostrarTotal(7);</code> como instrucción.</li>
+        <li>Un método <code>int</code> que solo contiene <code>System.out.println(a + b);</code> carece del retorno requerido. Para devolver la suma, escribe <code>return a + b;</code>.</li>
+      </ul>
+    </section>
+
+    <section role="tabpanel" id="inicio" aria-labelledby="tab-inicio" tabindex="0" hidden>
       <h2>¿Qué le pides a cada método?</h2>
-      <p>En Java, los tres ejemplos son <strong>métodos</strong>. En clase llamarás <strong>procedimiento</strong> al método con <code>void</code> y <strong>función</strong> al método que devuelve un dato con <code>return</code>.</p>
+      <p>Aplica cada tipo de método a una tarea que ya reconoces en tu juego.</p>
       <dl class="contracts">
         <div><dt><code>void mostrarTablero(char[][] matriz)</code></dt><dd>Muestra las filas en consola.</dd></div>
         <div><dt><code>int contarLibres(char[][] matriz)</code></dt><dd>Devuelve cuántas casillas contienen <code>'*'</code>.</dd></div>
         <div><dt><code>boolean esCasillaLibre(char[][] matriz, int fila, int columna)</code></dt><dd>Devuelve <code>true</code> o <code>false</code> para una posición.</dd></div>
       </dl>
-      <p><code>int fila</code> es un parámetro de la declaración. En <code>esCasillaLibre(matriz, 0, 1)</code>, el argumento <code>0</code> corresponde a <code>fila</code> y <code>1</code> a <code>columna</code>. Escribe estos métodos como <code>static</code> para llamarlos desde tu <code>main</code>.</p>
       <h3>Abre tu proyecto</h3>
       <p>En IntelliJ, abre la misma carpeta del juego y luego <code>src/Main.java</code>. Desde la carpeta del proyecto, usa Git Bash en Windows o Terminal en macOS para confirmar dónde estás.</p>
       <div class="copy-box"><button data-copy="ubicacion">Copiar comandos</button><pre id="ubicacion"><code>pwd
