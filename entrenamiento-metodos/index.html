@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traza el turno · Métodos Java</title>
+<link rel="stylesheet" href="styles.css">
+<script src="preguntas.js" defer></script>
+<script src="intensivo.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<main>
+<header>
+  <p>1SI · Java</p>
+  <h1>Traza el turno</h1>
+  <p>50 preguntas de entrenamiento. Haz la traza en papel, elige una predicción y comprueba tu razonamiento.</p>
+</header>
+<nav id="mapa" aria-label="Las 50 preguntas por bloque"></nav>
+<article aria-labelledby="titulo">
+  <p id="nivel" class="meta"></p>
+  <h2 id="titulo" tabindex="-1"></h2>
+  <p id="reto"></p>
+  <div class="mesa">
+    <section aria-labelledby="codigo-titulo">
+      <div class="toolbar">
+        <h3 id="codigo-titulo">Main.java</h3>
+        <button id="copiar" type="button">Copiar archivo</button>
+      </div>
+      <pre tabindex="0" aria-label="Programa Java"><code id="codigo"></code></pre>
+      <p id="copia-estado" role="status"></p>
+    </section>
+    <section aria-labelledby="prediccion-titulo">
+      <h3 id="prediccion-titulo">Predice el resultado</h3>
+      <p>En papel, anota llamada, parámetros, cambios, retorno y consola.</p>
+      <p id="formato-salida"></p>
+      <fieldset>
+        <legend>Elige una respuesta</legend>
+        <div id="opciones"></div>
+      </fieldset>
+      <div class="toolbar"><button id="comprobar" type="button" disabled>Comprobar</button><button id="siguiente" type="button">Siguiente →</button></div>
+    </section>
+  </div>
+  <section id="solucion" hidden aria-labelledby="solucion-titulo">
+    <h3 id="solucion-titulo" tabindex="-1"></h3>
+    <ol id="pasos"></ol>
+  </section>
+</article>
+<p id="progreso" role="status"></p>
+</main>
+</body>
+</html>

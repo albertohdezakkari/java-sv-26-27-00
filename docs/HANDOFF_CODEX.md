@@ -103,3 +103,7 @@ ChatGPT project includes files named CUESTIONARIO.txt, PROMPT-CUADRNOS.txt, PROM
 - `/tablero/metodos/` adds a formative practice linked from the existing notebook. It uses the classroom board's symbols and extracts printing, counting free cells and checking a coordinate into three methods.
 - The notebook shows cumulative examples using a small fixed matrix. Students apply the methods in their own project and test movement against a free cell, an obstacle and an edge.
 - The introductory tabs cover declaration and invocation, signature, execution flow, arguments, return values and mutation before students open their game. The same page links the theory to the original board practice.
+
+## 14. Traza el turno · entrenamiento de métodos — 2026-11-13
+- `/entrenamiento-metodos/` contains the 50-question practice authorized for GitHub Pages. All six blocks appear in the index and each number opens its Java program. Students trace on paper and use the browser to check their prediction.
+- Practice is ungraded, uses the same questions for everyone and does not submit responses. The public files come from the teacher draft at `ef5af0d`. The methods notebook links to the practice.
