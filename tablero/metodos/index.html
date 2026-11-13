@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Métodos en Java · Del código al tablero</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=lienzo">
   <script src="examples.js" defer></script>
   <script src="app.js" defer></script>
 </head>
@@ -31,13 +31,57 @@
     </nav>
 
     <section role="tabpanel" id="intro" aria-labelledby="tab-intro" tabindex="0">
-      <h2>Un método reúne instrucciones con un nombre</h2>
-      <p>Declaras el método una vez y lo llamas cada vez que necesitas esa tarea. Puedes usar la misma tarea con datos diferentes. Por ejemplo, <code>sumar(4, 3)</code> calcula 7 y <code>sumar(10, 2)</code> calcula 12.</p>
-      <dl class="contracts">
-        <div><dt>Procedimiento · <code>static void mostrarTotal(int total)</code></dt><dd>Recibe un número y escribe un mensaje en la consola. <code>void</code> indica que la llamada termina sin devolver un valor.</dd></div>
-        <div><dt>Función · <code>static int sumar(int a, int b)</code></dt><dd>Recibe dos números y devuelve un entero con <code>return</code>. Puedes guardar el resultado, combinarlo con otro cálculo o pasarlo a otro método.</dd></div>
-      </dl>
-      <p>En Java los dos se llaman <strong>métodos</strong>. Si vienes de PSeInt, reconoce la misma idea que en un subproceso con resultado y uno que realiza una acción sin devolverlo.</p>
+      <h2>¿Qué entra al método? ¿Qué sale?</h2>
+      <figure class="method-map" aria-labelledby="map-title">
+        <figcaption id="map-title">Desde <code>main</code>, sigue las flechas</figcaption>
+        <section class="method-lane function-lane" aria-labelledby="function-title">
+          <h3 id="function-title">Función <small>Devuelve un dato</small></h3>
+          <div class="method-flow">
+            <div class="method-node">
+              <span>En <code>main</code> · Llamada</span>
+              <code>sumar(<b>4</b>, <b>3</b>)</code>
+              <small>Argumentos de entrada</small>
+            </div>
+            <div class="method-arrow" aria-hidden="true"></div>
+            <div class="method-node method-code">
+              <span>Dentro del método</span>
+              <code>static <em>int</em> sumar(<b>int a, int b</b>) {<br>
+                &nbsp;&nbsp;<em>return</em> a + b;<br>}</code>
+              <small><code>a = 4</code> · <code>b = 3</code></small>
+            </div>
+            <div class="method-arrow" aria-hidden="true"></div>
+            <div class="method-node method-result">
+              <span>Vuelve a <code>main</code></span>
+              <strong>7</strong>
+              <small>Valor de retorno <code>int</code></small>
+            </div>
+          </div>
+        </section>
+        <section class="method-lane procedure-lane" aria-labelledby="procedure-title">
+          <h3 id="procedure-title">Procedimiento <small>Realiza una acción</small></h3>
+          <div class="method-flow">
+            <div class="method-node">
+              <span>En <code>main</code> · Llamada</span>
+              <code>mostrarTotal(<b>7</b>)</code>
+              <small>Argumento de entrada</small>
+            </div>
+            <div class="method-arrow" aria-hidden="true"></div>
+            <div class="method-node method-code">
+              <span>Dentro del método</span>
+              <code>static <em>void</em> mostrarTotal(<b>int total</b>) {<br>
+                &nbsp;&nbsp;System.out.println("Total: " + total);<br>}</code>
+              <small><code>total = 7</code></small>
+            </div>
+            <div class="method-arrow" aria-hidden="true"></div>
+            <div class="method-node method-result">
+              <span>En consola</span>
+              <code class="console-line">Total: 7</code>
+              <small><code>main</code> continúa sin recibir un valor.</small>
+            </div>
+          </div>
+        </section>
+      </figure>
+      <p>En Java, ambos son <strong>métodos</strong>. Los declaras una vez y puedes llamarlos con datos distintos.</p>
       <div class="viewer" data-example="fundamentos"></div>
       <p class="check"><strong>Antes de avanzar.</strong> Abre «Archivo entero». Localiza las dos llamadas a <code>sumar</code> y predice qué líneas escribirá <code>mostrarTotal</code>. Comprueba que los dos resultados son <code>Total: 7</code> y <code>Total: 12</code>.</p>
     </section>
@@ -45,6 +89,14 @@
     <section role="tabpanel" id="firma" aria-labelledby="tab-firma" tabindex="0" hidden>
       <h2>Lee una declaración pieza a pieza</h2>
       <p>Dentro de la clase <code>Main</code>, escribe los métodos después de la llave que cierra <code>main</code> y antes de la última llave de la clase. La llamada se escribe dentro de <code>main</code> o de otro método.</p>
+      <figure class="signature-map" aria-label="Partes de la declaración de sumar">
+        <div><code>static</code><span>Modificador</span></div>
+        <div><code>int</code><span>Tipo de retorno</span></div>
+        <div class="signature-part"><code>sumar</code><span>Nombre</span></div>
+        <div class="signature-part"><code>(int a, int b)</code><span>Parámetros</span></div>
+        <div><code>{ return a + b; }</code><span>Cuerpo</span></div>
+        <figcaption>Firma <code>sumar(int, int)</code></figcaption>
+      </figure>
       <div class="viewer" data-example="firma"></div>
       <dl class="contracts">
         <div><dt><code>static</code></dt><dd>El método pertenece a la clase. Aquí puedes llamarlo directamente desde <code>main</code>, que también es <code>static</code>.</dd></div>
