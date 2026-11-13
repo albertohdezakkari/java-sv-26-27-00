@@ -98,3 +98,8 @@ ChatGPT project includes files named CUESTIONARIO.txt, PROMPT-CUADRNOS.txt, PROM
 - The handler validates the quiz ID, group, selected school email format, all 15 unique item IDs, answer choices and 0–90 second times; computes the score server-side; stores one summary row and 15 detail rows; uses attempt IDs and a script lock for retry idempotency. Correct answers are not sent from the browser.
 - The student client has a registration hook, stable attempt IDs, answer timing, result status, and retry UI, but `REGISTRATION_ENDPOINT` remains empty. It does not transmit attempts and explicitly says so. No web app has been deployed and no end-to-end Sheets submission has been claimed.
 - Deployment would expose an Apps Script POST endpoint to the public quiz page. Since account selection is not authentication, anyone can submit a claimed `@svalero.com` address and self-reported answers; grades are formative and the endpoint does not verify student identity. Obtain teacher confirmation before deploying with public access. Then paste the `/exec` URL into the client, publish Pages, and verify one synthetic submission in both tabs before students use it.
+
+## 13. Métodos en Java sobre el tablero de clase — 2026-11-13
+- `/tablero/metodos/` adds a formative practice linked from the existing notebook. It uses the classroom board's symbols and extracts printing, counting free cells and checking a coordinate into three methods.
+- The notebook shows cumulative examples using a small fixed matrix. Students apply the methods in their own project and test movement against a free cell, an obstacle and an edge.
+- Check the publication at the live Pages URL and compare the four assets with the source commit.

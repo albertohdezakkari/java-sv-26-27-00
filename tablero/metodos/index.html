@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Métodos en Java · Del código al tablero</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="examples.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <a href="../">← Del código al tablero</a>
+      <p class="group">1SI · Programación Java</p>
+      <h1>Tu tablero, por métodos</h1>
+      <p class="intro">Abre el juego que ya hiciste. Vas a extraer tareas de <code>main</code> para mostrar el tablero, contar casillas libres y decidir si puedes mover al jugador.</p>
+    </header>
+    <nav aria-label="Pasos de la práctica">
+      <div role="tablist" aria-label="Pasos" id="steps">
+        <button role="tab" id="tab-inicio" aria-controls="inicio" aria-selected="true">Conceptos</button>
+        <button role="tab" id="tab-mostrar" aria-controls="mostrar" aria-selected="false" tabindex="-1">Mostrar</button>
+        <button role="tab" id="tab-contar" aria-controls="contar" aria-selected="false" tabindex="-1">Contar</button>
+        <button role="tab" id="tab-consultar" aria-controls="consultar" aria-selected="false" tabindex="-1">Consultar</button>
+        <button role="tab" id="tab-jugar" aria-controls="jugar" aria-selected="false" tabindex="-1">Aplicar</button>
+      </div>
+    </nav>
+
+    <section role="tabpanel" id="inicio" aria-labelledby="tab-inicio" tabindex="0">
+      <h2>¿Qué le pides a cada método?</h2>
+      <p>En Java, los tres ejemplos son <strong>métodos</strong>. En clase llamarás <strong>procedimiento</strong> al método con <code>void</code> y <strong>función</strong> al método que devuelve un dato con <code>return</code>.</p>
+      <dl class="contracts">
+        <div><dt><code>void mostrarTablero(char[][] matriz)</code></dt><dd>Muestra las filas en consola.</dd></div>
+        <div><dt><code>int contarLibres(char[][] matriz)</code></dt><dd>Devuelve cuántas casillas contienen <code>'*'</code>.</dd></div>
+        <div><dt><code>boolean esCasillaLibre(char[][] matriz, int fila, int columna)</code></dt><dd>Devuelve <code>true</code> o <code>false</code> para una posición.</dd></div>
+      </dl>
+      <p><code>int fila</code> es un parámetro de la declaración. En <code>esCasillaLibre(matriz, 0, 1)</code>, el argumento <code>0</code> corresponde a <code>fila</code> y <code>1</code> a <code>columna</code>. Escribe estos métodos como <code>static</code> para llamarlos desde tu <code>main</code>.</p>
+      <h3>Abre tu proyecto</h3>
+      <p>En IntelliJ, abre la misma carpeta del juego y luego <code>src/Main.java</code>. Desde la carpeta del proyecto, usa Git Bash en Windows o Terminal en macOS para confirmar dónde estás.</p>
+      <div class="copy-box"><button data-copy="ubicacion">Copiar comandos</button><pre id="ubicacion"><code>pwd
+test -f src/Main.java &amp;&amp; ls src/Main.java</code></pre></div>
+      <p>Si tienes el JDK disponible en la terminal y tu clase <code>Main</code> está directamente en <code>src</code> sin declaración <code>package</code>, puedes compilar y ejecutar desde la carpeta del proyecto con los mismos comandos en Git Bash y macOS. La carpeta temporal guarda los archivos compilados.</p>
+      <div class="copy-box"><button data-copy="ejecutar">Copiar comandos</button><pre id="ejecutar"><code>compilacion=$(mktemp -d) &amp;&amp;
+test -d "$compilacion" &amp;&amp;
+javac -d "$compilacion" src/Main.java &amp;&amp;
+java -cp "$compilacion" Main</code></pre></div>
+      <p class="check"><strong>Antes de avanzar.</strong> Comprueba que aparece <code>src/Main.java</code>. Ejecuta tu juego y localiza en <code>main</code> los bucles que muestran la matriz.</p>
+    </section>
+
+    <section role="tabpanel" id="mostrar" aria-labelledby="tab-mostrar" tabindex="0" hidden>
+      <h2>Muestra el tablero con un procedimiento</h2>
+      <p>Mueve los bucles de impresión a <code>mostrarTablero</code>. Escribe el método dentro de la clase <code>Main</code>, después de la llave que cierra <code>main</code>. En cada lugar donde imprimías la matriz, escribe <code>mostrarTablero(matriz);</code>.</p>
+      <p><code>print</code> escribe cada símbolo en la misma línea. <code>println()</code> pasa a la línea siguiente cuando termina la fila. El tipo <code>void</code> indica que la llamada termina sin devolver un valor.</p>
+      <div class="viewer" data-example="mostrar"></div>
+      <p class="check"><strong>Antes de avanzar.</strong> Ejecuta el juego. En los mismos puntos de antes debes ver las filas completas. Busca las llamadas en <code>main</code> y comprueba que el bucle de impresión está escrito una sola vez.</p>
+    </section>
+
+    <section role="tabpanel" id="contar" aria-labelledby="tab-contar" tabindex="0" hidden>
+      <h2>Devuelve el número de casillas libres</h2>
+      <p>Añade <code>contarLibres</code> al lado de <code>mostrarTablero</code>. Después de colocar todas las piezas y antes de pedir una tecla, llama al método y guarda su resultado en <code>int libres</code>.</p>
+      <p>Empieza con un contador a cero, súmale uno por cada <code>'*'</code> y escribe <code>return</code> después de recorrer todas las filas. En <code>main</code> puedes imprimir <code>libres</code> o usarlo en otra comprobación.</p>
+      <div class="viewer" data-example="contar"></div>
+      <p class="check"><strong>Antes de avanzar.</strong> Predice cuántas casillas libres hay en el ejemplo de 4 × 4 y comprueba que imprime <code>Casillas libres: 13</code>. En tu juego compara la salida con el número de casillas de tu matriz menos las ocupadas que realmente ves. Cambia temporalmente una casilla libre por un obstáculo y comprueba que el recuento baja exactamente uno. Revierte ese cambio de prueba.</p>
+    </section>
+
+    <section role="tabpanel" id="consultar" aria-labelledby="tab-consultar" tabindex="0" hidden>
+      <h2>Pregunta si una posición está libre</h2>
+      <p>Añade <code>esCasillaLibre</code>. Primero comprueba si la fila existe. Después comprueba la columna de esa fila. Solo entonces lee el símbolo. Así puedes consultar coordenadas negativas o demasiado grandes y recibir <code>false</code>.</p>
+      <p>Pulsa una casilla del tablero de prueba para ver la llamada y su resultado. Prueba una estrella, el obstáculo y una posición fuera del tablero.</p>
+      <div class="lab">
+        <div>
+          <table id="board"><caption>Tablero de prueba de 4 × 4</caption></table>
+          <p class="legend"><code>*</code> libre · <code>Y</code> jugador · <code>P</code> obstáculo · <code>F</code> meta</p>
+        </div>
+        <div>
+          <button id="outside">Probar fila −1</button>
+          <output id="result" aria-live="polite">Selecciona una casilla.</output>
+        </div>
+      </div>
+      <div class="viewer" data-example="consultar"></div>
+      <p class="check"><strong>Antes de avanzar.</strong> Ejecuta las tres llamadas de prueba del ejemplo. Deben imprimir, en orden, <code>true</code>, <code>false</code> y <code>false</code>. En tu juego, elige para las pruebas una casilla libre y un obstáculo que hayas visto en la consola.</p>
+    </section>
+
+    <section role="tabpanel" id="jugar" aria-labelledby="tab-jugar" tabindex="0" hidden>
+      <h2>Usa el resultado para mover a tu jugador</h2>
+      <p>Empieza con la tecla <code>D</code>. Calcula la columna de destino como la actual más uno. Usa <code>esCasillaLibre</code> dentro del <code>if</code> para decidir si puedes mover al jugador.</p>
+      <ol>
+        <li>Si está libre, borra la casilla de origen con <code>'*'</code>, actualiza la columna y coloca el símbolo del jugador en el destino.</li>
+        <li>Si está ocupada o fuera del tablero, conserva la posición original.</li>
+        <li>Llama a <code>mostrarTablero</code> después del intento. Prueba primero el movimiento a la derecha. Luego adapta la idea a las demás teclas que maneje tu juego.</li>
+      </ol>
+      <div class="copy-box"><button data-copy="cambios">Copiar comando</button><pre id="cambios"><code>git diff -- src/Main.java</code></pre></div>
+      <p>Desde la carpeta del proyecto, ejecuta ese comando en Git Bash o Terminal para revisar tus cambios respecto al índice de Git. Si ya preparaste el archivo con <code>git add</code>, revisa con <code>git diff --cached -- src/Main.java</code>.</p>
+      <p class="check"><strong>Antes de avanzar.</strong> Prueba un destino libre, un obstáculo y el borde derecho. En el primer caso cambia la posición del jugador y el número de libres se conserva. En los otros dos casos la posición se conserva. En las tres pruebas debe aparecer exactamente un jugador.</p>
+      <h3>Explícalo con tu código</h3>
+      <p>Señala una llamada, un parámetro y un <code>return</code>. Explica qué dato recibe <code>main</code> cuando llama a <code>esCasillaLibre</code> y qué hace con ese dato.</p>
+    </section>
+  </main>
+</body>
+</html>
